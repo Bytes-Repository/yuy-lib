@@ -1,0 +1,9 @@
+! Advanced vibrant-ui example
+# vibrant-ui
+@MD="# Title\n- Point1\n- Point2"
+
+> $VIBRANT markdown --content "$MD" ! Render markdown
+=5 > $VIBRANT spinner --duration 1 --message "Step $i" ! Loop spinners
+? [ some_condition ] > $VIBRANT progress --percent 100 --label "Done!" ! Conditional progress
+> $VIBRANT chart --data "$(seq 1 10 | shuf -n 5 | tr '\n' ',')" --chart_type sparkline ! Random sparkline
+& $VIBRANT interactive --mode demo ! Run interactive app
