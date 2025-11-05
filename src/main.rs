@@ -241,7 +241,8 @@ fn render_list(items: &str, selectable: bool) -> Result<()> {
     execute!(stdout, EnterAlternateScreen)?;
     let backend = CrosstermBackend::new(stdout);
     let mut terminal = Terminal::new(backend)?;
-    let list_items: Vec<ListItem> = items.split(',').map(|i| ListItem::new(i.trim())).collect();
+    let item_strings: Vec<String> = items.split(',').map(|i| i.trim().to_string()).collect();
+    let list_items: Vec<ListItem> = item_strings.iter().map(|i| ListItem::new(i.as_str())).collect();
     let mut state = ListState::default();
     terminal.draw(|f| {
         let list = List::new(list_items.clone())
@@ -256,7 +257,7 @@ fn render_list(items: &str, selectable: bool) -> Result<()> {
                 match key.code {
                     KeyCode::Down => state.select(Some(state.selected().unwrap_or(0) + 1)),
                     KeyCode::Up => state.select(Some(state.selected().unwrap_or(0).saturating_sub(1))),
-                    KeyCode::Enter => println!("Selected: {}", list_items[state.selected().unwrap_or(0)].content().lines[0].spans[0].content),
+                    KeyCode::Enter => println!("Selected: {}", item_strings[state.selected().unwrap_or(0)]),
                     KeyCode::Esc => (),
                     _ => (),
                 }
