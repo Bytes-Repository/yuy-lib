@@ -1,6 +1,6 @@
 [package]
 name = "yuy-lib"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]
@@ -11,3 +11,6 @@ syntect = "5.2" # Syntax highlighting (inspired by Rich)
 markdown = "1.0" # Markdown rendering
 anyhow = "1.0" # Error handling
 rand = "0.8" # For demo data
+
+[lib]
+crate-type = ["cdylib"]
