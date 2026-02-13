@@ -1,39 +1,53 @@
-! Wrapper dla biblioteki graficznej YUY (.so)
-
 :text
-    ! Wywołuje funkcję native_yuy_text z pliku .so
-    ! Argumenty: treść, kolor, styl
-    @call_native_yuy_text $1 $2 $3
-:
-
-:progress
-    ! Wywołuje funkcję native_yuy_progress
-    ! Argumenty: procent (liczba), etykieta
-    @call_native_yuy_progress $1 $2
+    ! Renderuje stylizowany tekst w terminalu.
+    ! Argumenty: $1 (treść), $2 (kolor/hex), $3 (style: bold,italic...)
+    @yuy_render_text $1 $2 $3
 :
 
 :table
-    ! Argumenty: nagłówki, wiersze
-    @call_native_yuy_table $1 $2
+    ! Wyświetla pełnoekranową tabelę (blokuje na 5s).
+    ! Argumenty: $1 (nagłówki po przecinku), $2 (wiersze: c1,c2|c3,c4)
+    @yuy_render_table $1 $2
+:
+
+:progress
+    ! Wyświetla pasek postępu z dynamicznym kolorem.
+    ! Argumenty: $1 (procent 0-100), $2 (etykieta)
+    @yuy_render_progress $1 $2
 :
 
 :spinner
-    ! Argumenty: czas, wiadomość
-    @call_native_yuy_spinner $1 $2
-:
-
-:chart
-    ! Argumenty: dane, typ_wykresu
-    @call_native_yuy_chart $1 $2
+    ! Wyświetla animowany spinner przez określony czas.
+    ! Argumenty: $1 (czas w sek), $2 (wiadomość)
+    @yuy_render_spinner $1 $2
 :
 
 :syntax
-    ! Argumenty: kod, język
-    @call_native_yuy_syntax $1 $2
+  ! Wyświetla kod z kolorowaniem składni syntect.
+  ! Argumenty: $1 (kod źródłowy), $2 (język, np. "rust", "py")
+  @yuy_render_syntax $1 $2
+:
+
+:markdown
+    ! Renderuje sformatowany Markdown (nagłówki, listy, bold).
+    ! Argumenty: $1 (tekst w formacie markdown)
+    @yuy_render_markdown $1
 :
 
 :list
-    ! Ta funkcja zwraca wartość do skryptu
-    $result = @call_native_yuy_list $1 $2
-    ^ $result
+    ! Wyświetla listę. Jeśli selectable=true, pozwala na interakcję.
+    ! Argumenty: $1 (elementy po przecinku), $2 (true/false)
+    @yuy_render_list $1 $2
+:
+
+:chart
+    ! Wyświetla wykres słupkowy (bar) lub liniowy (sparkline).
+    ! Argumenty: $1 (dane: "10,20,30"), $2 (typ: "bar" lub "line")
+    @yuy_render_chart $1 $2
+:
+
+:interactive
+    ! Uruchamia pełną aplikację TUI z kartami i obsługą myszy.
+    ! Argumenty: $1 (tryb: "demo", "input", "list")
+    @yuy_run_interactive_app $1
 :
