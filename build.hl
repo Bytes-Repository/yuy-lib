@@ -1,0 +1,4 @@
+// cargo
+// hl
+
+> cargo build --release
