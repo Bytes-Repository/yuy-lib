@@ -1,1 +1,39 @@
+! Wrapper dla biblioteki graficznej YUY (.so)
 
+:text
+    ! Wywołuje funkcję native_yuy_text z pliku .so
+    ! Argumenty: treść, kolor, styl
+    @call_native_yuy_text $1 $2 $3
+:
+
+:progress
+    ! Wywołuje funkcję native_yuy_progress
+    ! Argumenty: procent (liczba), etykieta
+    @call_native_yuy_progress $1 $2
+:
+
+:table
+    ! Argumenty: nagłówki, wiersze
+    @call_native_yuy_table $1 $2
+:
+
+:spinner
+    ! Argumenty: czas, wiadomość
+    @call_native_yuy_spinner $1 $2
+:
+
+:chart
+    ! Argumenty: dane, typ_wykresu
+    @call_native_yuy_chart $1 $2
+:
+
+:syntax
+    ! Argumenty: kod, język
+    @call_native_yuy_syntax $1 $2
+:
+
+:list
+    ! Ta funkcja zwraca wartość do skryptu
+    $result = @call_native_yuy_list $1 $2
+    ^ $result
+:
